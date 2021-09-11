@@ -109,7 +109,7 @@ func changeStruct(s *MyStruct){
 	// fmt.Println(*m)
 
 
-//闭包
+//闭包，返回一个func函数
 //a()()
 func a() func(){
 	return func(){

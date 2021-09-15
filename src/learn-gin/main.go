@@ -66,6 +66,32 @@ func applicationRun() {
 			"names":   names,
 		})
 	}, handle)
+	router.GET("/get", func(c *gin.Context) {
+		data := struct {
+			Data map[string]interface{} `json:"data"`
+			Msg  string                 `json:"msg"`
+			Code int                    `json:"code"`
+		}{
+			Data: map[string]interface{}{
+				"name":   "kiwi",
+				"age":    18,
+				"school": "南昌大学",
+			},
+			Msg:  "登录成功",
+			Code: 200,
+		}
+		c.JSON(200, data)
+	})
+	//获取路径参数，比如有人输入 “ /user/何东昌/18 ” 这样的路径
+	router.GET("/user/:name/:age", func(c *gin.Context) {
+		//获取路径参数
+		name := c.Param("name")
+		age := c.Param("age")
+		c.JSON(200, gin.H{
+			"name": name,
+			"age":  age,
+		})
+	})
 	router.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
 func main() {

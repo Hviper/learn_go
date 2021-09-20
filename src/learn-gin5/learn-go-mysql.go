@@ -35,9 +35,28 @@ func init() {
 func GetDBConnector() *gorm.DB {
 	return DbConnector
 }
+
+//sp_manager
 func Login(users *[]Users) *[]Users {
 	DbConnector.Table("sp_manager").Find(users)
 	return users
+}
+
+//查询最后一个数据的信息，并返回至datastruct中
+func QueryLast(tableName string, dataStruct interface{}) (result *interface{}) {
+	DbConnector.Table(tableName).Last(dataStruct)
+	return &dataStruct
+}
+
+//post  添加用户
+func AddUser(val interface{}) {
+	DbConnector.Table("db_table").Create(val)
+}
+
+//sp_user
+func UsersList(userlist *[]UserList) *[]UserList {
+	DbConnector.Table("sp_user").Find(userlist)
+	return userlist
 }
 func Query() []Product {
 	DbConnector.Find(&Products)

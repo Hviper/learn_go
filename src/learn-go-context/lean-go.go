@@ -73,5 +73,28 @@ func contextFunc() {
 }
 
 func main() {
-	contextFunc()
+	test()
+}
+
+//http中使用
+//因为过期时间大于处理时间，所以我们有足够的时间处理该请求，运行上述代码会打印出下面的内容：
+//handle 函数没有进入超时的 select 分支
+func test() {
+	ctx, cancel := context.WithTimeout(context.Background(), 1*time.Second)
+	defer cancel()
+
+	go handle(ctx, 500*time.Millisecond)
+	select {
+	case <-ctx.Done():
+		fmt.Println("main", ctx.Err())
+	}
+}
+
+func handle(ctx context.Context, duration time.Duration) {
+	select {
+	case <-ctx.Done():
+		fmt.Println("handle", ctx.Err())
+	case <-time.After(duration):
+		fmt.Println("process request with", duration)
+	}
 }

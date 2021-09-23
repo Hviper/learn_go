@@ -1,0 +1,4 @@
+time="2021-09-23 09:08:57" level=info msg="| 200 |            0s |       127.0.0.1 | GET | / |"
+time="2021-09-23 09:09:04" level=info msg="| 200 |            0s |       127.0.0.1 | GET | / |"
+time="2021-09-23 09:09:08" level=info msg="| 200 |            0s |       127.0.0.1 | GET | / |"
+time="2021-09-23 09:10:53" level=info msg="| 404 |            0s |       127.0.0.1 | GET | /sdsadasd |"
